@@ -35,9 +35,10 @@
     
     .nav-tab__link {
         border-radius: 6px;
-        padding: 5px 16px 5px;
-        font-size: 9px;
+        padding: 5px 15px 5px;
+        font-size: 10px;
         line-height: 16px;
+        white-space: nowrap;
               
     }
 }
