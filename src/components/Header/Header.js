@@ -6,9 +6,15 @@ import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <header className="App-header">
+    <header className="header">
         <img className="header__logo" src={logo} alt="Логотип: Место" />
         <div className='header__buttons'>
+          <button className="header__buttons_signup" onClick="">
+            Регистрация
+          </button>
+          <button className="header__buttons_signin" onClick="">
+            Войти
+          </button>
         </div>
     </header>
   );

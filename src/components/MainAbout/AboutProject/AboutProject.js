@@ -1,6 +1,6 @@
 import React from 'react';
 import './AboutProject.css';
-import '../Main/Main.css';
+import '../Main.css';
 
 function AboutProject() {
     return (
