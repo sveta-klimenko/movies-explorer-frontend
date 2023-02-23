@@ -1,17 +1,16 @@
 import React from 'react';
-import './Movies.css';
 import SearchForm from './SearchForm/SearchForm.js';
 import MoviesCardList from './MoviesCardList/MoviesCardList.js';
 
 
 
-function Movies() {
+function SavedMovies() {
     return (
         <>
         <SearchForm/>
-        <MoviesCardList isSaved={false}/>
+        <MoviesCardList isSaved={true}/>
         </>
     )
 }
 
-export default Movies;
+export default SavedMovies;

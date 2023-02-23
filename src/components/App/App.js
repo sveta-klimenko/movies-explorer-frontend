@@ -3,8 +3,9 @@ import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Main from '../Main/Main.js';
-import MainFilm from '../MainFilm/MainFilm.js';
-import MainProfile from '../MainProfile/MainProfile.js';
+import Movies from '../Movies/Movies.js';
+import SavedMovies from '../Movies/SavedMovies.js';
+import Profile from '../Profile/Profile.js';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -13,7 +14,8 @@ function App() {
       <Header/>
       <Routes>
                 <Route path="/" element={<Main/>} />
-                <Route path="/movies" element={<MainFilm/>} />
+                <Route path="/movies" element={<Movies/>} />
+                <Route path="/savedmovies" element={<SavedMovies/>} />
             </Routes>
       <Footer/>
     </div>

@@ -2,8 +2,7 @@ import React from "react";
 import "./MoviesCard.css";
 import imageTest from "../../../images/image1.png"
 
-function MoviesCard({ image, title, duration, isLiked = false, isSaved = false }) {
-
+function MoviesCard({ image, title, duration, isLiked = false, isSaved}) {
   let likeClass;
   let altText;
   let buttonTitle;
