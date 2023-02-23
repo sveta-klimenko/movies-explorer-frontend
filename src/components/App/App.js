@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import MainAbout from '../MainAbout/Main.js';
+import Main from '../Main/Main.js';
 import MainFilm from '../MainFilm/MainFilm.js';
 import MainProfile from '../MainProfile/MainProfile.js';
 import { Routes, Route } from 'react-router-dom';
@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Header/>
       <Routes>
-                <Route path="/" element={<MainAbout/>} />
+                <Route path="/" element={<Main/>} />
                 <Route path="/movies" element={<MainFilm/>} />
             </Routes>
       <Footer/>

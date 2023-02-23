@@ -7,7 +7,7 @@ import AboutMe from './AboutMe/AboutMe.js';
 import Portfolio from './Portfolio/Portfolio.js';
 
 
-function MainAbout() {
+function Main() {
     return (
         <>
         <Promo/>
@@ -19,4 +19,4 @@ function MainAbout() {
     )
 }
 
-export default MainAbout;
+export default Main;
