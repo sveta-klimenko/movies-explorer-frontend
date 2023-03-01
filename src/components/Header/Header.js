@@ -20,7 +20,7 @@ function Header({
       {isHeaderVisible && !isAutorized && 
       <>
         <NavLink to='/'>
-          <img className="header__logo" src={logo} alt="Логотип: Место" />
+          <img className="header__logo" src={logo} alt="Логотип" />
         </NavLink>
         <div className='header__buttons'>
           <NavLink to="/signup" className="header__signup">Регистрация</NavLink>
@@ -30,7 +30,7 @@ function Header({
       {isHeaderVisible && isAutorized && !isBurger && 
       <>
         <NavLink to='/'>
-          <img className="header__logo" src={logo} alt="Логотип: Место" />
+          <img className="header__logo" src={logo} alt="Логотип" />
         </NavLink>
         <div className='header__buttons'>
           <NavLink to="/movies" className="header__film">Фильмы</NavLink>
@@ -41,7 +41,7 @@ function Header({
       {isHeaderVisible && isAutorized && isBurger && 
       <>
         <NavLink to='/'>
-          <img className="header__logo" src={logo} alt="Логотип: Место" />
+          <img className="header__logo" src={logo} alt="Логотип" />
         </NavLink>
         <img className="header__burger" src={burger} alt="Открыть меню" onClick={onClick} />
         <div className={`header__burger-overlay ${isBurgerOpen && "header__burger-opened"}`}>
