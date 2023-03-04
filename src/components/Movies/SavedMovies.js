@@ -4,10 +4,10 @@ import MoviesCardList from './MoviesCardList/MoviesCardList.js';
 
 
 
-function SavedMovies() {
+function SavedMovies({onToggleClick, isToggleShort}) {
     return (
         <>
-        <SearchForm/>
+        <SearchForm isToggleShort={isToggleShort} onToggleClick={onToggleClick}/>
         <MoviesCardList isSaved={true}/>
         </>
     )

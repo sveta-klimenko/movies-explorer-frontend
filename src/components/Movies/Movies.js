@@ -2,13 +2,15 @@ import React from 'react';
 import './Movies.css';
 import SearchForm from './SearchForm/SearchForm.js';
 import MoviesCardList from './MoviesCardList/MoviesCardList.js';
+import Preloader from  './Preloader/Preloader.js'
 
 
 
-function Movies() {
+function Movies({onToggleClick, isToggleShort}) {
     return (
         <>
-        <SearchForm/>
+        <SearchForm isToggleShort={isToggleShort} onToggleClick={onToggleClick}/>
+        <Preloader/>
         <MoviesCardList isSaved={false}/>
         </>
     )

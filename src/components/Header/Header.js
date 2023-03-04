@@ -15,8 +15,7 @@ function Header({
   onClose
 }) {
   return (
-    <header className="header">
-      {!isHeaderVisible && <></>}
+    <header className={`header ${!isHeaderVisible && "header-none"}`}>
       {isHeaderVisible && !isAutorized && 
       <>
         <NavLink to='/'>

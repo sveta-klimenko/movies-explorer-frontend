@@ -1,7 +1,7 @@
 import React from 'react';
 import './SearchForm.css';
 
-function SearchForm() {
+function SearchForm({onToggleClick, isToggleShort}) {
     return (
       <section className="search-form">
         <div className="search-form__full">
@@ -20,7 +20,7 @@ function SearchForm() {
               className="search-form__checkbox"
               type="checkbox"
             />
-            <span className="search-form__toggle"></span>
+            <span className={`search-form__toggle ${!isToggleShort && "toggle-off"}`} onClick={onToggleClick}></span>
             <span className="search-form__name">Короткометражки</span>
           </label>
         </div>
