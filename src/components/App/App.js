@@ -7,7 +7,8 @@ import Movies from '../Movies/Movies.js';
 import SavedMovies from '../Movies/SavedMovies.js';
 import Profile from '../Profile/Profile.js';
 import Register from '../Auth/Register.js';
-import Login from '../Auth/Login';
+import Login from '../Auth/Login.js';
+import NotFound from "../NotFound/NotFound.js";
 import { Routes, Route } from 'react-router-dom';
 import {useLocation} from "react-router";
 import useIsMobile from '../../utils/hooks.js';
@@ -19,8 +20,8 @@ function App() {
   const location = useLocation();
   const isBurger = useIsMobile();
   
-  const isFooterVisible = !["/profile", "/signup", "/signin"].includes(location.pathname);
-  const isHeaderVisible = !["/signup", "/signin"].includes(location.pathname);
+  const isFooterVisible = ["/", "/movies", "/saved-movies",].includes(location.pathname);
+  const isHeaderVisible = ["/", "/movies", "/saved-movies", "/profile"].includes(location.pathname);
 
   function handleBurgerClick() {
     setIsBurgerOpen(true);
@@ -56,6 +57,7 @@ function App() {
         <Route path="/profile" element={<Profile/>} />
         <Route path="/signup" element={<Register/>} />
         <Route path="/signin" element={<Login/>} />
+        <Route path="/*" element={<NotFound/>} />
       </Routes>
       <Footer isFooterVisible={isFooterVisible}/>
     </div>

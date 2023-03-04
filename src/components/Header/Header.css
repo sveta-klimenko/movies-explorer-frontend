@@ -39,7 +39,7 @@
 }
 
 .header__signup:active {
-    opacity: 0.7;
+    opacity: 0.3;
 }
 
 .header__signin {    
@@ -59,7 +59,7 @@
 }
 
 .header__signin:active {
-    opacity: 0.7;
+    opacity: 0.3;
 }
 
 .header__film {
@@ -76,7 +76,7 @@
 }
 
 .header__film:active {
-    opacity: 0.7;
+    opacity: 0.3;
 }
 
 .header__profile {
@@ -99,7 +99,7 @@
 }
 
 .header__profile:active {
-    opacity: 0.7;
+    opacity: 0.3;
 }
 
 .header__burger {
@@ -111,7 +111,7 @@
 }
 
 .header__burger:active {
-    opacity: 0.7;;
+    opacity: 0.3;;
 }
 
 .header__burger-overlay {
@@ -160,7 +160,7 @@
 }
 
 .header__burger-close:active {
-    opacity: 0.7;
+    opacity: 0.3;
 }
 
 .active {

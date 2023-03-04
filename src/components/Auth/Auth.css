@@ -87,7 +87,7 @@ padding: 60px auto 70px;
 }
 
 .auth__submit-button:active {
-  opacity: 0.7;
+  opacity: 0.3;
 }
 
 .auth__subtitle {
@@ -114,7 +114,7 @@ padding: 60px auto 70px;
 }
 
 .auth__link:active {
-  opacity: 0.7;
+  opacity: 0.3;
 }
 
 @media (max-width: 460px) {
