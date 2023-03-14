@@ -27,12 +27,16 @@
 @media (max-width: 768px) {
 
     .nav-tab {
-        margin-bottom: 17px;
+        margin-bottom: 30px;
     }    
 }
 
 @media (max-width: 450px) {
     
+    .nav-tab {
+        margin-bottom: 17px;
+    }  
+
     .nav-tab__link {
         border-radius: 6px;
         padding: 5px 15px 5px;

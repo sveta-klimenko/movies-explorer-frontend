@@ -89,24 +89,36 @@
 
 @media (max-width: 770px) {
   .profile {
-  margin: 236px auto 0;
+  margin: 215px auto 0;
+  }
+
+  .profile__title {
+    margin-bottom: 90px;
+  }
+
+  .profile__fieldset {
+    margin-bottom: 195px;
   }
 }
 
 @media (max-width: 480px) {
   .profile {
-      margin: 70px auto 0;
+      margin: 47px auto 0;
   }
 
   .profile__title {
-    margin-bottom: 80px;
+    margin-bottom: 75px;
   }
 
   .profile__fieldset {
-    margin-bottom: 379px;
+    margin-bottom: 365px;
   }
 
   .profile__field {
     width: 260px;
+  }
+
+  .profile__save {
+    margin-bottom: 13px;
   }
 }

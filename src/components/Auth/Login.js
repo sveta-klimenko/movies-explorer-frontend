@@ -10,7 +10,7 @@ function Login() {
         <img className="auth__logo" src={logo} alt="Логотип" />
       </Link>
         <h1 className="auth__header">Рады видеть!</h1>
-        <fieldset className="auth__fieldset">
+        <fieldset className="auth__fieldset auth__login">
           <label className="auth__label">
             E-mail
             <input

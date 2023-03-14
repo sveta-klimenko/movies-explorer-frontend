@@ -23,6 +23,7 @@
   font-size: 12px;
   line-height: 15px;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 .movies-card-list__load-more:hover {
@@ -34,9 +35,22 @@
 }
 
 @media (max-width: 350px) {
+
+  .movies-card-list {
+    margin: 50px 0 0;
+  }
+
+  .movies-card-list__list {
+    gap: 15px;
+  }
+
   .movies-card-list__load-more {
-    margin: 80px 0 160px;
+    margin: 60px 0 80px;
     width: 240px;
     height: 36px;
+  }
+
+  .movies-card-list__free-space {
+    margin: 169px 0 0;
   }
 }

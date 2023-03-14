@@ -11,9 +11,11 @@ function MoviesCardList({isSaved}) {
         <MoviesCard isSaved={isSaved}/>
         <MoviesCard isSaved={isSaved}/>
       </ul>
-      { !isSaved && <button className="movies-card-list__load-more">     
+      {!isSaved && <button className="movies-card-list__load-more">     
       Еще
       </button>}
+      {isSaved && <div className="movies-card-list__free-space">     
+      </div>}
     </div>
   );
 }

@@ -1,5 +1,6 @@
 .App {
   background-color: #202020;
+  height: 100%;
   margin: 0;
   font-family: Inter, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

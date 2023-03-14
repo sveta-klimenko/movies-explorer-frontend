@@ -1,4 +1,9 @@
 .promo {
+    margin: 20px 40px 0;
+
+}
+
+.promo__block {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -7,8 +12,7 @@
     max-width: 1200px;
     height: 493px;
     margin: auto;
-    padding: 0 70px 0;
-
+    border-radius: 10px;
 }
 
 .promo__title {
@@ -22,8 +26,11 @@
     margin-top: 160px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 770px) {
     .promo {
+        margin: 20px 20px 0;
+    }
+    .promo__block {
         max-width: 728px;
         height: 834px;
     }
@@ -39,6 +46,10 @@
 
 @media (max-width: 450px) {
     .promo {
+        margin: 14px 14px 0;
+    }
+
+    .promo__block {
         max-width: 292px;
         height: 586px;
     }

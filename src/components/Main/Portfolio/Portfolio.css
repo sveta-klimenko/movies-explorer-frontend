@@ -48,24 +48,31 @@
 
 @media (max-width: 768px) {
   .portfolio {
-    padding: 91px 50px 90px
+    padding: 70px 50px 52px
+  }
+
+  .portfolio__title {
+    margin-bottom: 30px;
   }
 }
 
 @media (max-width: 600px) {
   .portfolio {
-    padding: 70px 14px 70px
+    padding: 50px 14px 35px
   }
   
   .portfolio__title {
     font-size: 14px;
     line-height: 20px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+  }
 
+  .portfolio__item-arrow {
+    width: 12px;
+    height: 14px;
   }
   
   .portfolio__link {
-  
     font-size: 18px;
     line-height: 28px;
     padding: 20px 0 20px;

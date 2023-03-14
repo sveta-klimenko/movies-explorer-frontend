@@ -77,13 +77,15 @@
 }
 
 .search-form__short-filter {
+  position: relative;
+  z-index: 0;
   display: flex;
   gap: 14px;
-
 }
 
 .search-form__checkbox {
   position: absolute;
+  z-index: -1;
   width: 1px; 
   height: 1px;
   overflow: hidden; 
@@ -128,7 +130,7 @@
 @media (max-width: 688px) {
   .search-form {
     margin: 0 10px 0;
-    padding: 80px 0 110px;
+    padding: 80px 0 45px;
   }
   
   .search-form__full {
@@ -145,6 +147,7 @@
     border-radius: 9px;
     padding: 0 19px 0;
     margin-bottom: 46px;
+    width: 260px;
   }
   
   .search-form__form::before {
@@ -160,5 +163,16 @@
   
   .search-form__decorline {
     display: none;
+  }
+
+  .search-form__short-filter {
+    gap: 20px;
+  }
+
+  .search-form__name {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 18px;
+    margin: 0;
   }
 }

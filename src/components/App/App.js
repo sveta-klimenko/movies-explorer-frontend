@@ -22,6 +22,7 @@ function App() {
   
   const isFooterVisible = ["/", "/movies", "/saved-movies",].includes(location.pathname);
   const isHeaderVisible = ["/", "/movies", "/saved-movies", "/profile"].includes(location.pathname);
+  const isAutorized = ["/movies", "/saved-movies", "/profile"].includes(location.pathname);
 
   function handleBurgerClick() {
     setIsBurgerOpen(true);
@@ -38,27 +39,23 @@ function App() {
   return (
     <div className="App">
       <Header 
-        isAutorized = {false}
-        isHeaderVisible={isHeaderVisible} 
-        isBurgerOpen={isBurgerOpen} 
-        onClick={handleBurgerClick} 
-        onClose={handleCloseClick}/>
-      <Header 
-        isAutorized = {true}
+        isAutorized = {isAutorized}
         isBurger = {isBurger}
         isHeaderVisible={isHeaderVisible} 
         isBurgerOpen={isBurgerOpen} 
         onClick={handleBurgerClick} 
         onClose={handleCloseClick}/>
-      <Routes>
-        <Route path="/" element={<Main/>} />
-        <Route path="/movies" element={<Movies isToggleShort={isToggleShort} onToggleClick={handleToggleClick}/>} />
-        <Route path="/saved-movies" element={<SavedMovies isToggleShort={isToggleShort} onToggleClick={handleToggleClick}/>} />
-        <Route path="/profile" element={<Profile/>} />
-        <Route path="/signup" element={<Register/>} />
-        <Route path="/signin" element={<Login/>} />
-        <Route path="/*" element={<NotFound/>} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<Main/>} />
+          <Route path="/movies" element={<Movies isToggleShort={isToggleShort} onToggleClick={handleToggleClick}/>} />
+          <Route path="/saved-movies" element={<SavedMovies isToggleShort={isToggleShort} onToggleClick={handleToggleClick}/>} />
+          <Route path="/profile" element={<Profile/>} />
+          <Route path="/signup" element={<Register/>} />
+          <Route path="/signin" element={<Login/>} />
+          <Route path="/*" element={<NotFound/>} />
+        </Routes>
+      </main>
       <Footer isFooterVisible={isFooterVisible}/>
     </div>
   );

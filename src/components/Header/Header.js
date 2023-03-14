@@ -46,9 +46,11 @@ function Header({
         <div className={`header__burger-overlay ${isBurgerOpen && "header__burger-opened"}`}>
           <div className='header__burger-menu'>
             <img className="header__burger-close" src={close} alt="Закрыть меню" onClick={onClose} />
-            <NavLink to="/" className="header__film">Главная</NavLink>
-            <NavLink to="/movies" className="header__film">Фильмы</NavLink>
-            <NavLink to="/saved-movies" className="header__film">Сохраненные фильмы</NavLink>
+            <div className='header__burger-links'>
+              <NavLink to="/" className="header__film-burger">Главная</NavLink>
+              <NavLink to="/movies" className="header__film-burger">Фильмы</NavLink>
+              <NavLink to="/saved-movies" className="header__film-burger">Сохраненные фильмы</NavLink>
+            </div>
             <NavLink to="/profile" className="header__profile account">Аккаунт</NavLink>
           </div>
         </div>

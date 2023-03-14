@@ -90,6 +90,16 @@
     }
 }
 
+@media (max-width: 770px) {
+    .about-me {
+        padding: 0 50px 0;
+    }
+
+    .about-me__full{
+        margin-top: 66px;
+    }
+}
+
 @media (max-width: 600px) {
     .about-me__full{
         flex-direction: column;

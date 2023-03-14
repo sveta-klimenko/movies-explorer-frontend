@@ -80,6 +80,7 @@ padding: 60px auto 70px;
   border: none;
   background-color: #4285F4;
   border-radius: 3px;
+  cursor: pointer;
 }
 
 .auth__submit-button:hover {
@@ -117,6 +118,28 @@ padding: 60px auto 70px;
   opacity: 0.3;
 }
 
+@media (max-width: 770px) {
+  .auth__header {
+    margin: 35px 0 35px;
+  }
+
+  .auth__label {
+    margin: 0 0 15px;
+  }
+
+  .auth__input {
+    padding: 10px 0 10px;
+  }
+
+  .auth__fieldset {
+    margin-bottom: 120px;
+  }
+
+  .auth__login {
+    margin-bottom: 200px;
+  }
+}
+
 @media (max-width: 460px) {
   .auth__form {
     max-width: 260px;
@@ -143,7 +166,7 @@ padding: 60px auto 70px;
   }
 
   .auth__fieldset{
-    margin-bottom: 65px;
+    margin-bottom: 50px;
   }
 
   .auth__submit {
@@ -168,5 +191,17 @@ padding: 60px auto 70px;
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
+  }
+
+  .auth__input {
+    padding: 8px 0 8px;
+  }
+
+  .auth__label {
+    margin: 0 0 17px;
+  }
+
+  .auth__login {
+    margin-bottom: 130px;
   }
 }

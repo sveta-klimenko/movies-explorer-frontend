@@ -137,19 +137,21 @@
 
 .header__burger-menu {
     position: relative;
+    z-index: 1;
     height: 100vh;
     width: calc(100% - 248px);
     background-color: #202020;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     gap: 24px;
+    overflow: auto;
 
 }
 
 .header__burger-close {
     position: absolute;
+    z-index: 2;
     top: 29px;
     right: 29px;
     cursor: pointer;
@@ -163,18 +165,47 @@
     opacity: 0.3;
 }
 
+.header__film-burger {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    color: #FFFFFF;
+    padding: 8px 0 8px;
+    text-decoration: none;
+}
+
 .active {
     text-decoration: underline;
 }
 
-.account {
-    margin-top: 200px;
-}
 
 @media (max-width: 768px) {
     .header {
         margin: 0 30px 0;
     }
+
+    .header__burger-links {
+        display: flex;
+        flex-direction: column;
+        margin-top: 159px;
+        gap: 28px;
+        align-items: center;
+        margin-bottom: 621px;
+
+    }
+
+    .header__film-burger {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .account {
+        margin-bottom: 90px;
+    }
+
+
+
 }
 
 @media (max-width: 470px) {
@@ -201,5 +232,19 @@
         font-size: 10px;
         line-height: 16px;
         padding: 5px 12px 5px;
+    }
+
+    .header__burger {
+        width: 38px;
+    }
+
+    .header__burger-links {
+        margin-top: 144px;
+        gap: 24px;
+        margin-bottom: 444px;
+    }
+
+    .account {
+        margin-bottom: 46px;
     }
 }
