@@ -1,0 +1,249 @@
+.header {
+    display: flex;
+    height: 74px;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin: 0 70px 0;
+  }
+
+.header-none {
+    display: none;
+}
+
+  .header__logo {
+    margin-top: 18px;
+    margin-bottom: 18px;
+    height: 38px;
+    width: 38px;
+}
+
+.header__buttons {
+    display: flex;
+    gap: 30px;
+}
+
+.header__signup {    
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #FFFFFF;
+    padding: 8px 20px 8px;
+    border: none;
+    text-decoration: none;
+}
+
+.header__signup:hover {
+    opacity: 0.5;
+}
+
+.header__signup:active {
+    opacity: 0.3;
+}
+
+.header__signin {    
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #000000;
+    background: #4285F4;
+    border-radius: 3px;
+    border: none;
+    padding: 8px 20px 8px;
+    text-decoration: none;
+}
+
+.header__signin:hover {
+    background-color: #8B8B8B
+}
+
+.header__signin:active {
+    opacity: 0.3;
+}
+
+.header__film {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    color: #FFFFFF;
+    padding: 8px 0 8px;
+    text-decoration: none;
+}
+
+.header__film:hover {
+    opacity: 0.5;
+}
+
+.header__film:active {
+    opacity: 0.3;
+}
+
+.header__profile {
+    box-sizing: border-box;
+    width: 100px;
+    height: 32px;
+    background: #313131;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px 0 8px;
+}
+
+.header__profile:hover {
+    opacity: 0.5;
+}
+
+.header__profile:active {
+    opacity: 0.3;
+}
+
+.header__burger {
+    cursor: pointer;
+}
+
+.header__burger:hover {
+    opacity: 0.5;
+}
+
+.header__burger:active {
+    opacity: 0.3;;
+}
+
+.header__burger-overlay {
+    visibility: hidden;
+    z-index: 1;
+    opacity: 100;
+    transition: opacity 0.5s, visibility 0.5s;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.header__burger-opened {
+    visibility: visible;
+}
+
+.header__burger-menu {
+    position: relative;
+    height: 100vh;
+    width: calc(100% - 248px);
+    background-color: #202020;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    overflow: auto;
+
+}
+
+.header__burger-close {
+    position: absolute;
+    top: 29px;
+    right: 29px;
+    cursor: pointer;
+}
+
+.header__burger-close:hover {
+    opacity: 0.5;
+}
+
+.header__burger-close:active {
+    opacity: 0.3;
+}
+
+.header__film-burger {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    color: #FFFFFF;
+    padding: 8px 0 8px;
+    text-decoration: none;
+}
+
+.active {
+    text-decoration: underline;
+}
+
+
+@media (max-width: 768px) {
+    .header {
+        margin: 0 30px 0;
+    }
+
+    .header__burger-links {
+        display: flex;
+        flex-direction: column;
+        margin-top: 159px;
+        gap: 28px;
+        align-items: center;
+        margin-bottom: 621px;
+
+    }
+
+    .header__film-burger {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .account {
+        margin-bottom: 90px;
+    }
+
+
+
+}
+
+@media (max-width: 470px) {
+    .header__burger-menu {
+        width: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .header {
+        margin: 0 14px 0;
+    }
+
+    .header__buttons {
+        gap: 14px;
+    }
+    
+    .header__signup {    
+        font-size: 10px;
+        line-height: 16px;
+    }
+    
+    .header__signin {    
+        font-size: 10px;
+        line-height: 16px;
+        padding: 5px 12px 5px;
+    }
+
+    .header__burger {
+        width: 38px;
+    }
+
+    .header__burger-links {
+        margin-top: 144px;
+        gap: 24px;
+        margin-bottom: 444px;
+    }
+
+    .account {
+        margin-bottom: 46px;
+    }
+}
