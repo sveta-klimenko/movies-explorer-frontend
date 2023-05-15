@@ -1,8 +1,17 @@
+import React, { useRef, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import './Auth.css';
 import logo from '../../images/logo.svg';
 
-function Register() {
+function Register({onClick}) {
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const nameRef = useRef();
+
+  function handleRegistrationClick(e){
+    e.preventDefault();
+    onClick({name:nameRef.current.value, email:emailRef.current.value, password:passwordRef.current.value})
+  }
   return (
     <main className="auth">
       <form className="auth__form">
@@ -20,6 +29,7 @@ function Register() {
               placeholder="Имя"
               className="auth__input"
               required=""
+              ref={nameRef}
             />
             <span className="auth__input-error-text" />
           </label>
@@ -32,6 +42,7 @@ function Register() {
               placeholder="e-mail"
               className="auth__input"
               required=""
+              ref={emailRef}
             />
             <span className="auth__input-error-text" />
           </label>
@@ -42,15 +53,16 @@ function Register() {
               name="password"
               type="password"
               placeholder="Пароль"
-              className="auth__input input-error"
+              className="auth__input"
               minLength={8}
               maxLength={50}
+              ref={passwordRef}
             />
-            <span className="auth__input-error-text">Что-то пошло не так...</span>
+            <span className="auth__input-error-text"></span>
           </label>
         </fieldset>
         <div className="auth__submit">
-          <button type="submit" className="auth__submit-button">
+          <button type="submit" className="auth__submit-button" onClick={handleRegistrationClick}>
             Зарегистрироваться
           </button>
           <span className="auth__subtitle">

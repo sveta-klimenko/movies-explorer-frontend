@@ -3,13 +3,30 @@ import './Movies.css';
 import SearchForm from './SearchForm/SearchForm.js';
 import MoviesCardList from './MoviesCardList/MoviesCardList.js';
 
-
-
-function Movies({onToggleClick, isToggleShort}) {
+function Movies({foundMovies, 
+    searchValue, 
+    setSearchValue, 
+    onToggleClick, 
+    isToggleShort, 
+    isLoading, 
+    onSearchClick,
+    onSave,
+    onDelete}) {
+    
     return (
         <>
-        <SearchForm isToggleShort={isToggleShort} onToggleClick={onToggleClick}/>
-        <MoviesCardList isSaved={false}/>
+        <SearchForm 
+            isToggleShort={isToggleShort} 
+            searchValue={searchValue} 
+            setSearchValue={setSearchValue} 
+            onToggleClick={onToggleClick} 
+            onSearchClick={onSearchClick}/>
+        <MoviesCardList 
+            foundMovies={foundMovies} 
+            isLoading={isLoading} 
+            isSaved={false}
+            onSave={onSave}
+            onDelete={onDelete}/>
         </>
     )
 }

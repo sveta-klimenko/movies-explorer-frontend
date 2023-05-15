@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './SearchForm.css';
 
-function SearchForm({onToggleClick, isToggleShort}) {
+
+
+function SearchForm({onToggleClick, searchValue, setSearchValue, isToggleShort, onSearchClick}) {
+
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    onSearchClick(searchValue);
+  }
+
     return (
       <section className="search-form">
         <div className="search-form__full">
@@ -10,9 +19,11 @@ function SearchForm({onToggleClick, isToggleShort}) {
               className="search-form__input"
               type="text"
               placeholder="Фильм"
+              onChange={(e) => setSearchValue(e.target.value)}
+              defaultValue = {searchValue}
               required
             />
-            <button className="search-form__button" type="submit"></button>
+            <button className="search-form__button" type="submit" onClick={handleSubmit}></button>
           </form>
           <div className="search-form__decorline"> </div>         
           <label className="search-form__short-filter">

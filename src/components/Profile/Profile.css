@@ -71,9 +71,13 @@
 }
 
 .profile__logout {
+  border: none;
+  background-color: transparent;
   font-weight: 500;
   font-size: 13px;
   line-height: 16px;
+  display: block;
+  cursor: pointer;
   text-align: center;
   color: #EE3465;
   text-decoration: none;
