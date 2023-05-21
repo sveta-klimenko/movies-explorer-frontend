@@ -2,11 +2,15 @@ import React, { useRef, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import './Auth.css';
 import logo from '../../images/logo.svg';
+import ValidationForm from '../ValidationForm/ValidationForm.js' 
 
-function Register({onClick}) {
+function Register({onClick, apiError}) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const nameRef = useRef();
+
+  const { values, handleChange, errors, isValid } = ValidationForm();
+
 
   function handleRegistrationClick(e){
     e.preventDefault();
@@ -28,10 +32,14 @@ function Register({onClick}) {
               type="text"
               placeholder="Имя"
               className="auth__input"
+              minLength='2'
+              maxLength='30'
+              pattern='^[a-zA-ZА-ЯЁа-яё\s\-]{2,30}$'
               required=""
               ref={nameRef}
+              onChange={handleChange}
             />
-            <span className="auth__input-error-text" />
+            <span className="auth__input-error-text">{errors.userName ? 'Имя должно быть длиной 2-30 символов и содержать только латиницу, кириллицу, пробел или дефис.':''}</span>
           </label>
           <label className="auth__label">
             E-mail
@@ -41,10 +49,12 @@ function Register({onClick}) {
               type="email"
               placeholder="e-mail"
               className="auth__input"
+              pattern=".+@.+\..+" 
               required=""
               ref={emailRef}
+              onChange={handleChange}
             />
-            <span className="auth__input-error-text" />
+            <span className="auth__input-error-text">{errors.email}</span>
           </label>
           <label className="auth__label">
             Пароль
@@ -57,12 +67,18 @@ function Register({onClick}) {
               minLength={8}
               maxLength={50}
               ref={passwordRef}
+              onChange={handleChange}
             />
-            <span className="auth__input-error-text"></span>
+            <span className="auth__input-error-text">{errors.password}</span>
           </label>
         </fieldset>
         <div className="auth__submit">
-          <button type="submit" className="auth__submit-button" onClick={handleRegistrationClick}>
+          <span className="auth__input-error-text">{apiError}</span>
+          <button type="submit" 
+            className={`auth__submit-button ${(!isValid || !values.userName || !values.email || !values.password) && 'disabled'}`} 
+            onClick={handleRegistrationClick} 
+            disabled={(!isValid || !values.userName || !values.email || !values.password)}
+          > 
             Зарегистрироваться
           </button>
           <span className="auth__subtitle">

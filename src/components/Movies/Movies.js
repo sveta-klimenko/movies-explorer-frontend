@@ -3,7 +3,8 @@ import './Movies.css';
 import SearchForm from './SearchForm/SearchForm.js';
 import MoviesCardList from './MoviesCardList/MoviesCardList.js';
 
-function Movies({foundMovies, 
+function Movies({foundMovies,
+    savedMovies, 
     searchValue, 
     setSearchValue, 
     onToggleClick, 
@@ -20,13 +21,16 @@ function Movies({foundMovies,
             searchValue={searchValue} 
             setSearchValue={setSearchValue} 
             onToggleClick={onToggleClick} 
-            onSearchClick={onSearchClick}/>
+            onSearchClick={onSearchClick}
+            />
         <MoviesCardList 
-            foundMovies={foundMovies} 
+            foundMovies={foundMovies}
+            savedMovies={savedMovies} 
             isLoading={isLoading} 
-            isSaved={false}
-            onSave={onSave}
-            onDelete={onDelete}/>
+            isSaved={false} 
+            onSave={onSave} 
+            onDelete={onDelete} 
+            />
         </>
     )
 }

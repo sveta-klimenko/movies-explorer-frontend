@@ -16,7 +16,6 @@ class MainApi {
   }
 
   register(credentials) {
-    console.log(credentials);
     return this._request(this.url + "/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -63,9 +62,9 @@ class MainApi {
           duration: data.duration,
           year: data.year,
           description: data.description,
-          image: `https://api.nomoreparties.co/beatfilm-movies${data.image.url}`,
+          image: `https://api.nomoreparties.co/${data.image.url}`,
           trailerLink: data.trailerLink,
-          thumbnail: `https://api.nomoreparties.co/beatfilm-movies${data.image.url}`,
+          thumbnail: `https://api.nomoreparties.co/${data.image.url}`,
           movieId: data.id,
           nameRU: data.nameRU,
           nameEN: data.nameEN,

@@ -11,25 +11,29 @@ function MoviesCard( {card, savedRoute, isSaved, onSave, onDelete} ) {
   let likeClass;
   let altText;
   let buttonTitle;
-  let onClick;
+  let isDelete;
 
-  if (savedRoute) {
+  if (isSaved) {
     likeClass = "movies-card__button movies-card__button_type_unsave";
     altText = "Удалить из сохраненных";
     buttonTitle = "";
-    onClick = onDelete(card);
+    isDelete = true;
   } else {
     likeClass = "movies-card__button movies-card__button_type_save";
     altText = "Сохранить";
     buttonTitle = "Сохранить";
-    onClick = onSave(card);
+    isDelete = false;
   }
-  if (isSaved) {
+  if (savedRoute) {
     likeClass = "movies-card__button movies-card__button_type_delete";
     altText = "Удалить из сохраненных";
     buttonTitle = "";
-    onClick = onDelete(card);
+    isDelete = true;
   }
+
+ function handleClick(movie) {
+  isDelete ? onDelete(movie) : onSave(movie)
+ }
 
   return (
     <li className="movies-card">     
@@ -45,7 +49,7 @@ function MoviesCard( {card, savedRoute, isSaved, onSave, onDelete} ) {
         className="movies-card__image-link"
         >
           <img
-            src={ `https://api.nomoreparties.co/${card.image.url}`}
+            src={isSaved ? card.image : `https://api.nomoreparties.co/${card.image.url}`}
             alt={card.nameRU}
             title={card.nameRU}
             className="movies-card__image"
@@ -56,7 +60,7 @@ function MoviesCard( {card, savedRoute, isSaved, onSave, onDelete} ) {
                 type="button"
                 className={likeClass}
                 title={altText}
-                onClick={onClick}
+                onClick={() => handleClick(card)}
         >{buttonTitle}</button>
       </div>
     </li>

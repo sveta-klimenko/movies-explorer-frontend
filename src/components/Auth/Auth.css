@@ -118,6 +118,15 @@ padding: 60px auto 70px;
   opacity: 0.3;
 }
 
+.disabled {
+  background-color: #353535;
+  cursor: not-allowed;
+}
+
+.disabled:hover {
+  opacity: 1;
+}
+
 @media (max-width: 770px) {
   .auth__header {
     margin: 35px 0 35px;

@@ -4,7 +4,7 @@ import "./MoviesCardList.css";
 import MoviesCard from '../MoviesCard/MoviesCard.js'
 import Preloader from "../Preloader/Preloader";
 
-function MoviesCardList({foundMovies, isLoading, isSaved, onSave, onDelete}) {
+function MoviesCardList({foundMovies, savedMovies, isLoading, isSaved, onSave, onDelete}) {
   const renderCards = () => {
     const render = {
       start: 12,
@@ -22,9 +22,6 @@ function MoviesCardList({foundMovies, isLoading, isSaved, onSave, onDelete}) {
   }
 
   const render = renderCards();
-
-  const location = useLocation();
-  const savedRoute = location.pathname === "/saved-movies";
 
   const [MoviesAmount, setMoviesAmount] = useState(render.start);
   const [moviesToRender, setMoviesToRender] = useState([]);
@@ -49,13 +46,21 @@ useEffect(() => {
       } else {setMoviesToRender([])}
   }, [foundMovies, MoviesAmount])
 
+  const location = useLocation();
+  const routeSaved = location.pathname === '/saved-movies';
+
   return (
     <div className="movies-card-list">
       <ul className="movies-card-list__list">
         {isLoading && <Preloader/>}
-        {!isLoading && moviesToRender && moviesToRender.map((card) =>
+        {!isLoading && !routeSaved && moviesToRender && moviesToRender.map((card) =>
               <MoviesCard key={card.id}
-              card={card} savedRoute={savedRoute} isSaved={isSaved} onSave={onSave} onDelete={onDelete} 
+              card={savedMovies.some((element) => element.movieId === card.id) ? savedMovies.filter((element) => element.movieId === card.id)[0] : card} isSaved={savedMovies.some((element) => element.movieId === card.id)} onSave={onSave} onDelete={onDelete}
+              />
+            )}
+        {!isLoading && routeSaved && moviesToRender && moviesToRender.map((card) => 
+              <MoviesCard key={card.movieId}
+              card={card} savedRoute={routeSaved} isSaved={isSaved} onSave={onSave} onDelete={onDelete}
               />
             )}
         {!foundMovies && <span className="movies-card-list__not-found">Ничего не найдено</span>}

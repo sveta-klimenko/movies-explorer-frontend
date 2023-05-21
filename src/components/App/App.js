@@ -17,7 +17,6 @@ import { ProtectedLoggedRoute } from "../ProtectedRoute/ProtectedLoggedRoute";
 import {useLocation} from "react-router";
 import useIsMobile from '../../utils/hooks.js';
 import { CurrentUserContext, defaultUserInfo } from '../../contexts/CurrentUserContext.js';
-import { noSavedMovies, searchError, searchErrorMovieNotFound, searchNoValues } from '../../utils/messages_errors.js';
 
 function App() {
   const [isBurgerOpen, setIsBurgerOpen] = useState(false);
@@ -27,11 +26,12 @@ function App() {
   const [shortMovies, setShortMovies] = useState([]);
   const [foundMovies, setFoundMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-    const [searchValue, setSearchValue] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [savedMoviesErrorMessage, setSavedMoviesErrorMessage] = useState('');
+  const [foundSavedMovies, setFoundSavedMovies] = useState([]);
+  const [searchValue, setSearchValue] = useState('');
   const [currentUser, setCurrentUser] = useState(defaultUserInfo);
   const [isAutorized, setIsAutorized] = useState(false);
+  const [apiError, setApiError] = useState('');
+  const [isSuccesfull, setIsSuccesfull] = useState(false);
 
   const location = useLocation();
   const isBurger = useIsMobile();
@@ -63,7 +63,6 @@ function App() {
       mainApi.getUser()
         .then((user) => {
           if (user) {
-            console.log(user)
             setIsAutorized(true);
             setCurrentUser(user);
           } else {
@@ -82,11 +81,22 @@ function App() {
     checkToken();
   }, []);
 
+  useEffect(() => {
+    if (isAutorized) {
+      mainApi
+      .getSavedMovies()
+      .then((res) => {
+        const myUserMoviesList = res.data.filter(movie => movie.owner === currentUser.data._id);
+        setSavedMovies(myUserMoviesList);
+      })
+      .catch((err) => console.log(err));
+    }
+  }, [currentUser]);
+
   function handleRegistration(credentials){
       mainApi.register(credentials)
       .then((result) => {
         setCurrentUser(result);
-        console.log(credentials.email, credentials.password)
         return mainApi.login({ email: credentials.email, password: credentials.password })
       })
       .then((result) => {
@@ -95,7 +105,7 @@ function App() {
         navigate('/movies');
       })
       .catch((err) => {
-        console.log(err.message)
+        setApiError(err.message)
       })
   }
 
@@ -107,7 +117,7 @@ function App() {
         navigate('/movies');
       })
       .catch((err) => {
-        console.log(err.message)
+        setApiError(err.message)
       })
   }
 
@@ -118,9 +128,8 @@ function App() {
     setMovies([]);
     setShortMovies([]);
     setFoundMovies([]);
+    setFoundSavedMovies([]);
     setSearchValue('');
-    setErrorMessage('');
-    setSavedMoviesErrorMessage('');
     setCurrentUser(defaultUserInfo);
     setIsAutorized(false);
     setCurrentUser(defaultUserInfo);
@@ -134,9 +143,10 @@ function App() {
     mainApi.setUser(user.name, user.email)
       .then((userUpdateData) => {
         setCurrentUser( { ...currentUser, data: userUpdateData } );
+        setIsSuccesfull(true);
       })
       .catch((err) => {
-        console.log(err.message)
+        setApiError(err)
       })
   };
 
@@ -158,12 +168,10 @@ function App() {
     setIsLoading(true);
     localStorage.setItem('searchValue', inputValue);
     moviesApi.getMovies().then(res => {
-      console.log('res', res)
       setMovies(res);
       checkIsMovieShort(res);
       setFoundMovies(findByValue(inputValue, isToggleShort? shortMovies : res));
       const foundMovies = findByValue(inputValue, isToggleShort? shortMovies : res);
-      console.log('foundMovies', foundMovies)
       if (foundMovies === undefined) {
         localStorage.setItem('foundMovies', JSON.stringify(null))
       } else {localStorage.setItem('foundMovies', JSON.stringify(foundMovies));}
@@ -173,6 +181,29 @@ function App() {
     })
     .finally(() => setIsLoading(false));
 }
+
+function handleSavedSearchClick(inputValue){
+  localStorage.setItem('isToggleShort', isToggleShort);
+    setIsLoading(true);
+    localStorage.setItem('searchValue', inputValue);
+
+    mainApi
+      .getSavedMovies()
+      .then((res) => {
+        const myUserMoviesList = res.data.filter(movie => movie.owner === currentUser.data._id);
+        setSavedMovies(myUserMoviesList);
+        checkIsMovieShort(res.data);
+        setFoundSavedMovies(findByValue(inputValue, isToggleShort? shortMovies : res.data));
+        const foundMovies = findByValue(inputValue, isToggleShort? shortMovies : res.data);
+        if (foundMovies === undefined) {
+          localStorage.setItem('foundSavedMovies', JSON.stringify(null))
+        } else {localStorage.setItem('foundSavedMovies', JSON.stringify(foundMovies));}
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => setIsLoading(false));
+  }
 
   function checkIsMovieShort(movies) {
     setShortMovies(movies.filter(function (item) {
@@ -185,25 +216,22 @@ function App() {
     const results = data.filter(function (item) {
      return item.nameRU.toLowerCase().includes(value.toLowerCase()) || item.nameEN.toLowerCase().includes(value.toLowerCase());
    });
-   console.log('results', results)
     if (results.length === 0) {
-     route === '/movies' ? setErrorMessage(searchErrorMovieNotFound) : setSavedMoviesErrorMessage(searchErrorMovieNotFound);
      return null;
    } else {
      return results;
    }
  }
 
- function handleSaveMovie(movie) {
-  const token = localStorage.getItem('jwt') || '';
-  mainApi.setToken(token);
-		mainApi.saveMovie(movie)
-		.then((res) => {
-			setSavedMovies([res.movie, ...savedMovies]);
-		}).catch((err) => console.log(err.message))
-	}
+  function handleSaveMovie(movie) {
+    const token = localStorage.getItem('jwt') || '';
+    mainApi.setToken(token);
+    mainApi.saveMovie(movie)
+    .then((res) => {setSavedMovies([res, ...savedMovies]);
+    }).catch((err) => console.log(err.message))
+  }
 
-	function handleDeleteMovie (movie) {
+	function handleDeleteMovie(movie) {
     const token = localStorage.getItem('jwt') || '';
     mainApi.setToken(token);
 		mainApi.deleteMovie(movie._id)
@@ -212,6 +240,10 @@ function App() {
 				return !(item._id === movie._id);
 			})
 			setSavedMovies(newList);
+      const newFoundList = foundSavedMovies.filter((item) => {
+				return !(item._id === movie._id);
+			})
+      setFoundSavedMovies(newFoundList)
 		}).catch((err) => console.log(err.message));
 	}
 
@@ -234,6 +266,7 @@ function App() {
               <ProtectedRoute isAutorized={isAutorized}>
                 {<Movies 
                   foundMovies={foundMovies}
+                  savedMovies={savedMovies}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue} 
                   isToggleShort={isToggleShort}
@@ -247,13 +280,14 @@ function App() {
             <Route path="/saved-movies" element={
               <ProtectedRoute isAutorized={isAutorized}>
                 {<SavedMovies 
-                  foundMovies={foundMovies}
+                  foundMovies={foundSavedMovies}
                   searchValue={searchValue}
                   setSearchValue={setSearchValue} 
                   isToggleShort={isToggleShort}
                   isLoading={isLoading} 
                   onToggleClick={handleToggleClick} 
-                  onSearchClick={handleSearchClick}
+                  onSearchClick={handleSavedSearchClick}
+                  onSave={handleSaveMovie}
                   onDelete={handleDeleteMovie}/>} 
               </ProtectedRoute>}
             />
@@ -261,19 +295,25 @@ function App() {
               <ProtectedRoute isAutorized={isAutorized}>
                 {<Profile
                   onLogoutClick={handleLogout}
-                  onChangeClick={handleUpdateUser}/>}
+                  onChangeClick={handleUpdateUser}
+                  apiError={apiError}
+                  setApiError={setApiError}
+                  isSuccesfull={isSuccesfull}
+                  setIsSuccesfull={setIsSuccesfull}/>}
               </ProtectedRoute>}
             />
             <Route path="/signup" element={
               <ProtectedLoggedRoute isAutorized={isAutorized}>
                 {<Register
-                  onClick={handleRegistration}/>} 
+                  onClick={handleRegistration}
+                  apiError={apiError}/>} 
               </ProtectedLoggedRoute>}
             />
             <Route path="/signin" element={
               <ProtectedLoggedRoute isAutorized={isAutorized}>
                 {<Login
-                  onClick={handleLogin}/>}
+                  onClick={handleLogin}
+                  apiError={apiError}/>}
             </ProtectedLoggedRoute>} />
             <Route path="/*" element={<NotFound/>} />
           </Routes>
