@@ -90,7 +90,7 @@ class MainApi {
 const currentUrl = window.location.href; 
 
 const mainApi = new MainApi({
-  url: currentUrl.includes('localhost') ? 'http://localhost:3002' : 'https://dogroseknight.back.nomoredomains.club',
+  url: currentUrl.includes('localhost') ? 'http://localhost:3002' : 'https://api.diploma.dogroseknight.nomoredomains.club',
   headers: {
     Authorization: "",
     "content-Type": "application/json",
