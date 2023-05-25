@@ -284,7 +284,7 @@ function handleSavedSearchClick(inputValue){
             <Route path="/saved-movies" element={
               <ProtectedRoute isAutorized={isAutorized}>
                 {<SavedMovies 
-                  foundMovies={foundSavedMovies.length != 0 ? foundSavedMovies : savedMovies }
+                  foundMovies={(foundSavedMovies === null || foundSavedMovies.length != 0) ? foundSavedMovies : savedMovies }
                   searchValue={searchValue}
                   setSearchValue={setSearchValue} 
                   isToggleShort={isToggleShort}
