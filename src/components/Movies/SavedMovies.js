@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import SearchForm from './SearchForm/SearchForm.js';
 import MoviesCardList from './MoviesCardList/MoviesCardList.js';
 
@@ -12,7 +12,8 @@ function SavedMovies({foundMovies,
     isLoading, 
     onSearchClick,
     onSave,
-    onDelete}) {
+    onDelete,
+    zeroSearchValue}) {
 
     return (
         <>
@@ -27,7 +28,9 @@ function SavedMovies({foundMovies,
             isLoading={isLoading} 
             isSaved={true}
             onSave={onSave}
-            onDelete={onDelete}/>
+            onDelete={onDelete}
+            zeroSearchValue={zeroSearchValue}
+            />
         </>
     )
 }

@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SearchForm.css';
-
-
+import {useLocation} from "react-router";
 
 function SearchForm({onToggleClick, searchValue, setSearchValue, isToggleShort, onSearchClick}) {
 
+  const location = useLocation();
+  const routeSaved = location.pathname === '/saved-movies';
+  const [toggle, setToggle] = useState(true)
+
+  useEffect(() => {
+    onSearchClick(searchValue);
+  }, [isToggleShort]);
 
   function handleSubmit(e) {
     e.preventDefault();
+    localStorage.setItem('isToggleShort', isToggleShort);
     onSearchClick(searchValue);
+  }
+
+  function handleToggle() {
+    onToggleClick();
   }
 
     return (
@@ -20,7 +31,7 @@ function SearchForm({onToggleClick, searchValue, setSearchValue, isToggleShort, 
               type="text"
               placeholder="Фильм"
               onChange={(e) => setSearchValue(e.target.value)}
-              defaultValue = {searchValue}
+              defaultValue = {routeSaved ? "" : searchValue}
               required
             />
             <button className="search-form__button" type="submit" onClick={handleSubmit}></button>
@@ -31,7 +42,7 @@ function SearchForm({onToggleClick, searchValue, setSearchValue, isToggleShort, 
               className="search-form__checkbox"
               type="checkbox"
             />
-            <span className={`search-form__toggle ${!isToggleShort && "toggle-off"}`} onClick={onToggleClick}></span>
+            <span className={`search-form__toggle ${!isToggleShort && "toggle-off"}`} onClick={handleToggle}></span>
             <span className="search-form__name">Короткометражки</span>
           </label>
         </div>

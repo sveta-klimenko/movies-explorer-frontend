@@ -4,7 +4,7 @@ import "./MoviesCardList.css";
 import MoviesCard from '../MoviesCard/MoviesCard.js'
 import Preloader from "../Preloader/Preloader";
 
-function MoviesCardList({foundMovies, savedMovies, isLoading, isSaved, onSave, onDelete}) {
+function MoviesCardList({foundMovies, savedMovies, isLoading, isSaved, onSave, onDelete, zeroSearchValue}) {
   const renderCards = () => {
     const render = {
       start: 12,
@@ -53,7 +53,7 @@ useEffect(() => {
     <div className="movies-card-list">
       <ul className="movies-card-list__list">
         {isLoading && <Preloader/>}
-        {!isLoading && !routeSaved && moviesToRender && moviesToRender.map((card) =>
+        {!zeroSearchValue && !isLoading && !routeSaved && moviesToRender && moviesToRender.map((card) =>
               <MoviesCard key={card.id}
               card={savedMovies.some((element) => element.movieId === card.id) ? savedMovies.filter((element) => element.movieId === card.id)[0] : card} isSaved={savedMovies.some((element) => element.movieId === card.id)} onSave={onSave} onDelete={onDelete}
               />
@@ -63,9 +63,10 @@ useEffect(() => {
               card={card} savedRoute={routeSaved} isSaved={isSaved} onSave={onSave} onDelete={onDelete}
               />
             )}
-        {!foundMovies && <span className="movies-card-list__not-found">Ничего не найдено</span>}
+        {!zeroSearchValue && !foundMovies && <span className="movies-card-list__not-found">Ничего не найдено</span>}
+        {!routeSaved && zeroSearchValue && foundMovies && <span className="movies-card-list__not-found">Нужно ввести ключевое слово</span>}
       </ul>
-      {!allMoviesRendered && <button className="movies-card-list__load-more" onClick={changeCounter}>     
+      {!zeroSearchValue && !allMoviesRendered && <button className="movies-card-list__load-more" onClick={changeCounter}>     
       Еще
       </button>}
       {allMoviesRendered && <div className="movies-card-list__free-space">     

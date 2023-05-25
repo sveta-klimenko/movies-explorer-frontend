@@ -82,11 +82,9 @@ function Profile({
       <div className="profile__buttons">
         <span className="profile__error">{apiError}</span>
         <span className="profile__success">{isSuccesfull && 'Обновление прошло успешно'}</span>
-        <button type="submit" className={`profile__save ${(!isValid || ((!values.userName || values.userName === currentUser.data.name) || 
-            (!values.email || values.email === currentUser.data.email)))? 'disabled' : ''}`} 
+        <button type="submit" className={`profile__save ${(!isValid || (values.userName === currentUser.data.name && values.email === currentUser.data.email))? 'disabled' : ''}`} 
           onClick={handleInfoChange}
-          disabled={!isValid || ((!values.userName || values.userName === currentUser.data.name) || 
-            (!values.email || values.email === currentUser.data.email))}
+          disabled={(!isValid || (values.userName === currentUser.data.name && values.email === currentUser.data.email))}
         >Редактировать</button>
         <button to="/" className="profile__logout" onClick={handleLogout}>Выйти из аккаунта</button>
       </div>

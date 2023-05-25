@@ -28,6 +28,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [foundSavedMovies, setFoundSavedMovies] = useState([]);
   const [searchValue, setSearchValue] = useState('');
+  const [zeroSearchValue, setZeroSearchValue] = useState(true)
   const [currentUser, setCurrentUser] = useState(defaultUserInfo);
   const [isAutorized, setIsAutorized] = useState(false);
   const [apiError, setApiError] = useState('');
@@ -47,14 +48,6 @@ function App() {
     setisToggleShort(JSON.parse(localStorage.getItem('isToggleShort')));
     setFoundMovies(JSON.parse(localStorage.getItem('foundMovies')));
     }, [isAutorized])
-
-  /*useEffect(() => {
-    localStorage.setItem('isToggleShort', isToggleShort);
-    localStorage.setItem('searchValue', searchValue);
-    if (foundMovies === undefined) {
-      localStorage.setItem('foundMovies', JSON.stringify(null))
-    } else {localStorage.setItem('foundMovies', JSON.stringify(foundMovies));}
-    }, [isToggleShort,searchValue,foundMovies])*/
 
   function checkToken() {
     const token = localStorage.getItem('jwt') || '';
@@ -130,6 +123,7 @@ function App() {
     setFoundMovies([]);
     setFoundSavedMovies([]);
     setSearchValue('');
+    setZeroSearchValue(true);
     setCurrentUser(defaultUserInfo);
     setIsAutorized(false);
     setCurrentUser(defaultUserInfo);
@@ -163,30 +157,40 @@ function App() {
     localStorage.setItem('isToggleShort', !isToggleShort);
   }
 
+  function searchMovie (res, inputValue) {
+    setMovies(res);
+    checkIsMovieShort(res);
+    setFoundMovies(findByValue(inputValue, isToggleShort? shortMovies : res));
+    const foundMovies = findByValue(inputValue, isToggleShort? shortMovies : res);
+    if (foundMovies === undefined) {
+      localStorage.setItem('foundMovies', JSON.stringify(null))
+    } else {localStorage.setItem('foundMovies', JSON.stringify(foundMovies));}
+  }
+
   function handleSearchClick(inputValue){
-    localStorage.setItem('isToggleShort', isToggleShort);
+    setZeroSearchValue(false)
     setIsLoading(true);
     localStorage.setItem('searchValue', inputValue);
-    moviesApi.getMovies().then(res => {
-      setMovies(res);
-      checkIsMovieShort(res);
-      setFoundMovies(findByValue(inputValue, isToggleShort? shortMovies : res));
-      const foundMovies = findByValue(inputValue, isToggleShort? shortMovies : res);
-      if (foundMovies === undefined) {
-        localStorage.setItem('foundMovies', JSON.stringify(null))
-      } else {localStorage.setItem('foundMovies', JSON.stringify(foundMovies));}
+    if (inputValue === ""){
+      setZeroSearchValue(true);
+      console.log(zeroSearchValue);
+    };
+    if(movies.length != 0){
+      searchMovie (movies, inputValue);
+      setIsLoading(false);
+    } else {
+      moviesApi.getMovies().then(res => {
+      searchMovie (res, inputValue);
     })
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => setIsLoading(false));
+    .finally(() => setIsLoading(false));}
 }
 
 function handleSavedSearchClick(inputValue){
-  localStorage.setItem('isToggleShort', isToggleShort);
     setIsLoading(true);
     localStorage.setItem('searchValue', inputValue);
-
     mainApi
       .getSavedMovies()
       .then((res) => {
@@ -247,7 +251,6 @@ function handleSavedSearchClick(inputValue){
 		}).catch((err) => console.log(err.message));
 	}
 
-
   return (
     <div className="App">
       <CurrentUserContext.Provider value={currentUser}>
@@ -274,13 +277,14 @@ function handleSavedSearchClick(inputValue){
                   onToggleClick={handleToggleClick} 
                   onSearchClick={handleSearchClick}
                   onSave={handleSaveMovie}
-                  onDelete={handleDeleteMovie}/>}
+                  onDelete={handleDeleteMovie}
+                  zeroSearchValue={zeroSearchValue}/>}
               </ProtectedRoute>}
             />
             <Route path="/saved-movies" element={
               <ProtectedRoute isAutorized={isAutorized}>
                 {<SavedMovies 
-                  foundMovies={foundSavedMovies}
+                  foundMovies={foundSavedMovies.length != 0 ? foundSavedMovies : savedMovies }
                   searchValue={searchValue}
                   setSearchValue={setSearchValue} 
                   isToggleShort={isToggleShort}
@@ -288,7 +292,9 @@ function handleSavedSearchClick(inputValue){
                   onToggleClick={handleToggleClick} 
                   onSearchClick={handleSavedSearchClick}
                   onSave={handleSaveMovie}
-                  onDelete={handleDeleteMovie}/>} 
+                  onDelete={handleDeleteMovie}
+                  zeroSearchValue={zeroSearchValue}
+                  />} 
               </ProtectedRoute>}
             />
             <Route path="/profile" element={

@@ -12,7 +12,8 @@ function Movies({foundMovies,
     isLoading, 
     onSearchClick,
     onSave,
-    onDelete}) {
+    onDelete,
+    zeroSearchValue}) {
     
     return (
         <>
@@ -29,7 +30,8 @@ function Movies({foundMovies,
             isLoading={isLoading} 
             isSaved={false} 
             onSave={onSave} 
-            onDelete={onDelete} 
+            onDelete={onDelete}
+            zeroSearchValue={zeroSearchValue} 
             />
         </>
     )
