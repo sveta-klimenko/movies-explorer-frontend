@@ -22,10 +22,15 @@
 }
 
 .movies-card__title {
+  display: block;
   margin: 0;
+  width: 275px;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   color: #FFFFFF;
 }
 
@@ -90,7 +95,12 @@
 
   .movies-card__image {
     height: 190px;
-  }}
+  }
+
+  .movies-card__title {
+    max-width: 255px;
+  }
+}
 
 
   @media (max-width: 375px) {
